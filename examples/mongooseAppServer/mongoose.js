@@ -63,6 +63,31 @@ async function callDB() {
     
     await queryDB();
 }
+
+async function newQuestion(data) {
+    console.log(data);
+    console.log(typeof data);
+    if (typeof data == 'string') {
+        data = JSON.parse(data);
+    }
+    try {
+        await mongoose.connect(connectionString);
+
+        let userQuestion = new Review(data.data);
+
+        await userQuestion.save().then(()=> {
+            console.log('users question has been saved');
+        });
+
+        await mongoose.disconnect();
+        return true;
+
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+
+}
 //localhost:3001/?variable=value&variable1=value
 //google.com/?q=Paradiso+Movie+Times&newVariable=test
 //google.com/?q=dogs+or+cats
@@ -70,9 +95,25 @@ app.get('/', async (req, res)=> {
     console.log('Request Query Parameters', req.query);
     console.log('Request Body Parameters', req.body);
 
-    await callDB();
+    //await callDB();
 
     res.json({data: "Hello, Class!"});
+});
+
+app.post('/', async (req, res)=> {
+    console.log('Request Query Parameters', req.query);
+    console.log('Request Body Parameters', req.body);
+
+    let data = req.query.data || req.body.data;
+
+    let result = await newQuestion(data);
+
+    if (result) {
+        res.send("Your Question has been saved");
+    } else {
+        res.sendStatus(500);
+        res.send("Your Questions wasn't saved");
+    }
 });
 
 app.listen(3001, ()=> {

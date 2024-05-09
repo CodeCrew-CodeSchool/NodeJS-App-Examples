@@ -4,7 +4,7 @@
 express - backend server library
 mongoose - ORM and DB connector
 cors - configures app security
-dotenv
-axios
+dotenv - local/program environment variables
+axios - library for making API calls
 
 docker
