@@ -2,7 +2,7 @@
 //what do?
 
 express - backend server library
-mongoose - 
+mongoose - ORM and DB connector
 cors
 dotenv
 axios
