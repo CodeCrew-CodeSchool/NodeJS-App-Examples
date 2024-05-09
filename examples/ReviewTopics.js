@@ -3,7 +3,7 @@
 
 express - backend server library
 mongoose - ORM and DB connector
-cors
+cors - configures app security
 dotenv
 axios
 
