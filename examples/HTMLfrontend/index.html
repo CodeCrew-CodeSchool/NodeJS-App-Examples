@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Frontend</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <h1>Use the UI below to call the server</h1>
+    <!-- GET call that returns json -->
+    <div>
+        <h3 id="getResponse"></h3>
+        <button id="getCall">GET Call</button>
+    </div>
+    
+    <!-- POST call that we can submit questions to -->
+    <div>
+        <h3>Enter a New Question for the Review App</h3>
+        <label for="topic">Topic</label>
+        <input name="topic" type="text"/>
+        <label for="question">Question</label>
+        <input name="question" type="text" />
+        <button id="postCall">POST Call</button>
+    </div>
+    <div id="questions">
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

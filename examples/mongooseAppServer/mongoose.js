@@ -52,6 +52,7 @@ async function queryDB() {
         console.log(results);
     
         await mongoose.disconnect();
+        return results;
     } catch (error) {
         console.log(error);
     }
@@ -73,7 +74,13 @@ async function newQuestion(data) {
     try {
         await mongoose.connect(connectionString);
 
-        let userQuestion = new Review(data.data);
+        let userQuestion = new Review(data);
+
+        if (userQuestion.id == undefined) {
+            let currentCollection = await Review.find();
+            let newID = currentCollection.length + 1
+            userQuestion.id = newID;
+        }
 
         await userQuestion.save().then(()=> {
             console.log('users question has been saved');
@@ -96,8 +103,9 @@ app.get('/', async (req, res)=> {
     console.log('Request Body Parameters', req.body);
 
     //await callDB();
+    let results = await queryDB();
 
-    res.json({data: "Hello, Class!"});
+    res.json(results);
 });
 
 app.post('/', async (req, res)=> {
@@ -109,10 +117,10 @@ app.post('/', async (req, res)=> {
     let result = await newQuestion(data);
 
     if (result) {
-        res.send("Your Question has been saved");
+        res.json({data: "Your Question has been saved"});
     } else {
         res.sendStatus(500);
-        res.send("Your Questions wasn't saved");
+        res.json({data: "Your Questions wasn't saved"});
     }
 });
 
