@@ -1,7 +1,9 @@
-# Auth
+# Node Examples
+
+### TODO Auth Example
 Simple implementation of Authentication without any external dependencies
 
-## examples
+## Review the examples and build a working App with a Backend and Frontend
 See the examples folder for code examples of the various program types we've created throughout Module 3
 
 ### mongoose
